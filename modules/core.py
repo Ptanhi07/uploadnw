@@ -150,6 +150,22 @@ def time_name():
     current_time = now.strftime("%H%M%S")
     return f"{date} {current_time}.mp4"
 
+# Function to download a file from URL
+def download_html_file(url, local_filename):
+    try:
+        # Send a GET request to the URL
+        response = requests.get(url, stream=True)
+        response.raise_for_status() 
+
+        with open(local_filename, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:
+                    f.write(chunk)
+        
+        return local_filename 
+    except requests.exceptions.RequestException as e:
+        print(f"Error downloading file from {url}: {e}")
+        return None
 
 async def download_video(url,cmd, name):
     download_cmd = f'{cmd} -R 25 --fragment-retries 25 --external-downloader aria2c --downloader-args "aria2c: -x 16 -j 32"'
