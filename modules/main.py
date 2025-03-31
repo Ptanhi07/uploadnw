@@ -182,6 +182,8 @@ async def account_login(bot: Client, m: Message):
             try:
                 cc = f'** {str(count).zfill(3)}. **{name} ({res}) GAMER.mkv\n\n**Batch Name : **{raw_text0}\n\n**Downloaded By : {raw_text3}\n\n**'
                 cc1 = f'** {str(count).zfill(3)}. **{name} GAMER.pdf\n\n**Batch Name : **{raw_text0}\n\n**Downloaded By : {raw_text3}\n\n**'
+                cc5 = f'⋅**{str(count).zfill(3)}.** {name} GAMER.html\n\n**Batch Name** : {raw_text0}\n\n**Downloaded By : {raw_text3}**' 
+                
                 if "drive" in url:
                     try:
                         ka = await helper.download(url, name)
@@ -238,7 +240,7 @@ async def account_login(bot: Client, m: Message):
 
             except Exception as e:
                 await m.reply_text(
-                    f"**downloading Interupted **\n{str(e)}\n**Name** ➤ {name}\n**Link** ➤ {url}"
+                    f"**downloading Failed**\nError : {str(e)}\n**Name** : {name}\n**Link** : {url}"
                 )
                 continue
 
