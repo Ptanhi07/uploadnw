@@ -1,7 +1,6 @@
-## Deploy To heroku 
+# txt uploader
 
-[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Ptanhi07/uploadnw)
+## DEPLOY TO HEROKU
 
-## Deploy To Render                  
+[![Deploy to heroku chacha](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https://github.com/Ptanhi07/uploadnw)
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Ptanhi07/uploadnw)
