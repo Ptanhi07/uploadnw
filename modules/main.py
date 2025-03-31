@@ -41,7 +41,7 @@ async def restart_handler(_, m):
 
 
 
-@bot.on_message(filters.command(["TXT"]))
+@bot.on_message(filters.command(["file"]))
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text('Hi\n\nTO download a test file send here » ')
     input: Message = await bot.listen(editable.chat.id)
@@ -180,8 +180,8 @@ async def account_login(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
             try:
-                cc = f'** {str(count).zfill(3)}. **{name} {res} [MASOOM].mkv\n\n**Batch Name : **{raw_text0}\n\n**Extracted  By ➤ {raw_text3}\n\n**'
-                cc1 = f'** {str(count).zfill(3)}. **{name} [MASOOM].pdf\n\n**Batch Name : **{raw_text0}\n\n**Extracted  By ➤ {raw_text3}\n\n**'
+                cc = f'** {str(count).zfill(3)}. **{name} ({res}) GAMER.mkv\n\n**Batch Name : **{raw_text0}\n\n**Downloaded By : {raw_text3}\n\n**'
+                cc1 = f'** {str(count).zfill(3)}. **{name} GAMER.pdf\n\n**Batch Name : **{raw_text0}\n\n**Downloaded By : {raw_text3}\n\n**'
                 if "drive" in url:
                     try:
                         ka = await helper.download(url, name)
@@ -207,7 +207,7 @@ async def account_login(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    Show = f"**⥥ Downloading ➤**\n**Name ➤** `{name}\n\nQuality ➤ {raw_text2}` \n\n**Bot By ➤ **@MASOOMGURJARTG"
+                    Show = f"**⥥ Downloading ➤**\n**Name ➤** `{name}`"
                
                     prog = await m.reply_text(Show)
                     res_file = await helper.download_video(url, cmd, name)
@@ -225,7 +225,7 @@ async def account_login(bot: Client, m: Message):
 
     except Exception as e:
         await m.reply_text(e)
-    await m.reply_text("🔰Done🔰")
+    await m.reply_text("Done ✅")
 
 
 bot.run()
