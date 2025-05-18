@@ -196,24 +196,18 @@ async def account_login(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
 
-                elif ".ws" in url:
-                    try:
-                        html_filename = f"{name}.html"
-                        helper.download_html_file(url, html_filename)
-                        #cc5 = f'**{str(count).zfill(3)}. **{name1}** GAMER.html\n\n**Batch Name** : `{b_name}`\n\n**Downloaded By : {CR}**'  
-                        copy = await bot.send_document(chat_id=m.chat.id, document=html_filename, caption=cc5)
-                        file_id = copy.document.file_id
-                        save_file_id(collection, original_url, file_id, "document")
-
-                        # Clean up files
-                        os.remove(html_filename)              
-                        count += 1
-                        time.sleep(5)
-                    except Exception as e:
-                        failed_links.append(f'{str(count).zfill(3)}) {name}:{url}\n')
-                        print(f"Error processing .ws file: {e}")
-                        time.sleep(5)
-                        continue
+                elif ".ws" in url and  url.endswith(".ws"):
+                        try : 
+                            await helper.pdf_download(f"{api_url}utkash-ws?url={url}&authorization={api_token}",f"{name}.html")
+                            time.sleep(1)
+                            await bot.send_document(chat_id=m.chat.id, document=f"{name}.html", caption=cc1)
+                            os.remove(f'{name}.html')
+                            count += 1
+                            time.sleep(5)
+                        except FloodWait as e:
+                            await asyncio.sleep(e.x)
+                            await m.reply_text(str(e))
+                            continue
                         
                 elif ".pdf" in url:
                     try:
