@@ -182,8 +182,7 @@ async def account_login(bot: Client, m: Message):
             try:
                 cc = f'**{str(count).zfill(3)}** . {name} .mkv\n\n**Batch Name** : {raw_text0}\n\n**Downloaded By : {raw_text3}\n\n**'
                 cc1 = f'**{str(count).zfill(3)}** . {name} .pdf\n\n**Batch Name** : {raw_text0}\n\n**Downloaded By : {raw_text3}\n\n**'
-                cc5 = f'⋅**{str(count).zfill(3)}** . {name} .html\n\n**Batch Name** : {raw_text0}\n\n**Downloaded By : {raw_text3}**' 
-                
+        
                 if "drive" in url:
                     try:
                         ka = await helper.download(url, name)
@@ -196,19 +195,21 @@ async def account_login(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
 
-                elif ".ws" in url and  url.endswith(".ws"):
-                        try : 
-                            await helper.pdf_download(f"{api_url}utkash-ws?url={url}&authorization={api_token}",f"{name}.html")
-                            time.sleep(1)
-                            await bot.send_document(chat_id=m.chat.id, document=f"{name}.html", caption=cc1)
-                            os.remove(f'{name}.html')
+                elif ".ws" in url:
+                        try:
+                            html_filename = f"{name}.html"
+                            helper.download_html_file(url, html_filename)
+                            cc5 = f'**{str(count).zfill(3)}** . **{name1}** .html\n\n**Batch Name ** : `{raw_text0}`\n\n**Downloaded By : {MR}**'  
+                            copy = await bot.send_document(chat_id=m.chat.id, document=html_filename, caption=cc5)
+                            # Clean up files
+                            os.remove(html_filename)              
                             count += 1
-                            time.sleep(5)
-                        except FloodWait as e:
-                            await asyncio.sleep(e.x)
+                            time.sleep(3)
+                        except Exception as e:
                             await m.reply_text(str(e))
+                            time.sleep(5)
                             continue
-                        
+                            
                 elif ".pdf" in url:
                     try:
                         cmd = f'yt-dlp -o "{name}.pdf" "{url}"'
